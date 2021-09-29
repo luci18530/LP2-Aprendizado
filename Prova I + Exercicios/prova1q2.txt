@@ -1,0 +1,54 @@
+(Questão 2 - 1 ponto) Utilize a implementação da questão 1 para destacar as 
+diferenças do uso de threads e processos na programação em C/C++. Destaque 
+trechos do código e realce as diferenças também as diferenças do ponto de vista
+ da execução. A resposta deverá ser colocada em um arquivo de texto (extensão 
+“.txt”) separado.
+
+Processo significa que um programa está em execução, enquanto thread significa um segmento de um processo. Para criar threads em C/C++ é preciso das seguintes instruções : 
+pthread_t lebres[instancias];
+
+pthread_create(&lebres[i], NULL, &corridathread, (void *)&lebrecorrida[i]);
+
+Devido ao fato deste programa acima requerer múltiplas threads e envolver uma serie de structs, é necessário usar a função pthread_create dentro de um for.
+
+Abaixo a função executadas pelas threads, nota-se o uso de ponteiros, e o uso de struct no parâmetro, pois a função pthread_create só aceita um parâmetro, logo se for requerido mais de dois parâmetros, requerem-se o uso de structs. Devido a execução múltipla, é imposto uma função usleep antes da condicional que verifica a vitória, pois, no tempo de execução, um lebre pode vencer a corrida, enquanto uma outra thread está a caminho de fazer um print indesejado 
+
+void *corridathread(void *lebre){
+
+    struct lebres *lebre_t = lebre;
+    printf("Oi sou a lebre[%d]\n",lebre_t->id);
+    win = 0;
+    float salto;
+
+    lebre_t ->pecorrido = 0.0;
+
+    while(lebre_t -> pecorrido < lebre_t -> distancia){
+
+        salto = ( (float)rand( ) / (float) RAND_MAX * lebre_t ->salto_max);
+        lebre_t -> pecorrido += salto;
+        usleep(10000);
+
+        if (win == 1) {
+            break;
+        }
+
+        else {
+            printf("[Lebre %d] Saltou %.2f cm e Percorreu %.2f cm\n", lebre_t->id, salto, lebre_t->pecorrido);
+        }
+
+        
+
+        sleep(1);
+
+        if (lebre_t ->pecorrido >= lebre_t -> distancia && win == 0){
+            printf("\n\nLebre %d ganhou a corrida! A distancia era de : %d cm\n\n", lebre_t->id, lebre_t ->distancia);
+            win = 1;
+            pthread_exit(NULL);
+            break;
+        }
+       
+    }
+    
+}
+
+Nota-se um tempo de execução e uso de memoria mais baixos ao usar threads

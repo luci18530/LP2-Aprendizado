@@ -1,0 +1,39 @@
+(Questão 4 - 1 ponto) Utilize a execução e a implementação da questão anterior 
+para discutir o ciclo de vida das threads. Faça a relação de cada invocação a 
+funções da API PThreads com a máquina de estados (descrevendo seus estados e 
+transições) que representa o ciclo de vida das threads. A resposta deverá ser
+ colocada em um arquivo de texto (extensão “.txt”) separado.
+
+Primeiramente, é criado a thread, e posto no estado de executavel
+pthread_t threads[QTD_THREADS];
+
+pthread_create(&threads[i], NULL, funcao_thread, NULL);
+
+Agora, dentro da função, as threads estão no estado de execução:
+void *funcao_thread()
+{
+    textogerado = fopen("textogerado.txt", "a");
+     
+    for (int i = 0; i < QTD_THREADS; i++) {
+        
+        printf("%s\n", string);
+        fputs(string, textogerado);
+        fputs("\n", textogerado);
+        
+        string[1] = string[1] + 1;
+        string[2] = string[2] + 1;
+        string[3] = string[3] + 1;
+        
+        
+    }
+
+    
+    string[0] = string[0] + 1;
+    string[1] = 65;
+    string[2] = 65;
+    string[3] = 65;
+
+    fclose(textogerado);
+}
+
+Após isso, o programa é encerrado e consequentemente as threads estão agora no estado finalizado

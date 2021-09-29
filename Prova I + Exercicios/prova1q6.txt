@@ -1,0 +1,5 @@
+(Questão 6 - 1 ponto)  Crie um arquivo de texto explicando o que você entende 
+por consistência de memória; faça um esqueleto de código explicando se algo 
+deveria ser modificado no código da questão anterior com relação a manutenção 
+da consistência de memória.
+Consistência de memória especifica um contrato entre o programador e o sistema, em que o sistema garante que, se o programador seguir as regras, a memória será consistente e os resultados da leitura, gravação ou atualização da memória serão previsíveis. No código, que é simples, apenas o uso da função usleep com tempo maior que 50000 microssegundos, na estrutura de repetição que cria as threads já pode garantir uma consistência de memoria 
